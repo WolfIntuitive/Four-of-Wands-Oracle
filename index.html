@@ -38,41 +38,24 @@
       z-index: 2;
     }
     .card-wrapper {
-      perspective: 1000px;
       margin-top: 20px;
       z-index: 1;
     }
     .card {
       width: 320px;
-      height: 220px;
       background: rgba(34, 34, 34, 0.95);
       box-shadow: 0 0 20px #fuchsia;
-      transform-style: preserve-3d;
-      transition: transform 0.8s;
-      position: relative;
-      cursor: pointer;
-    }
-    .card.flipped {
-      transform: rotateY(180deg);
-    }
-    .card-side {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 20px;
       text-align: center;
-      font-size: 18px;
+      border-radius: 10px;
     }
     .card-front {
       font-size: 24px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
     .card-back {
-      transform: rotateY(180deg);
+      font-size: 18px;
       font-style: italic;
     }
     button {
@@ -104,11 +87,11 @@
   <img src="FOWP logo.png" alt="Four of Wands Logo" class="logo-top" />
   <div class="card-wrapper">
     <div class="card" id="oracleCard">
-      <div class="card-side card-front" id="front">
+      <div class="card-front" id="front">
         What bullshit "excuses" are you trying to convince yourself of today?
       </div>
-      <div class="card-side card-back" id="back">
-        Click to flip and reveal your wisdom.
+      <div class="card-back" id="back">
+        Click draw to reveal your wisdom.
       </div>
     </div>
   </div>
@@ -119,109 +102,128 @@
   <div class="copyright">&copy; Fourofwands.podcast 2025</div>
   <script>
     const fullDeck = [
-      { front: "Your spell isn’t broken. Your discipline is.", back: "Intent without action is just a wish." },
-      { front: "The spirit team isn’t ignoring you.", back: "You just haven’t shown up for them all month." },
-      { front: "Stop blaming your tools.", back: "The real magic is in consistency." },
-      { front: "Witch tip: Cleanse your space and your standards.", back: "Both are overdue." },
-      { front: "Power doesn’t come from Pinterest.", back: "Try study, ritual, and actually committing." },
-      { front: "The ancestors are watching.", back: "Light the damn candle and get to work." },
-      { front: "They’re not your soulmate, they’re your self-worth test.", back: "Stop failing it." },
-      { front: "If love feels like chaos, it’s not love.", back: "It’s a trauma bond with nice lighting." },
-      { front: "Flirt with your future, not your past.", back: "Don’t text your ex. They’re still trash." },
-      { front: "The only thing you're investing in is denial.", back: "Open your bank app. Then act like a grown-up." },
-      { front: "Money likes direction, not desperation.", back: "Try a plan, not a panic." },
-      { front: "Stop ghosting your budget.", back: "That’s why it keeps haunting you." },
-      { front: "You’re not stuck, you’re scared.", back: "Name the fear, then punch it in the throat (metaphorically)." },
-      { front: "You can't heal what you hide.", back: "Expose the wound. Air that shit out." },
-      { front: "Quit romanticizing your survival mode.", back: "That’s not strength, it’s exhaustion." },
-      { front: "Mercury isn’t sabotaging you — your calendar is.", back: "Try showing up prepared." },
-      { front: "Your birth chart didn’t make you rude.", back: "Manners are universal, starseed." },
-      { front: "Astrology is guidance, not gospel.", back: "You still have free will, dumbass." },
-      { front: "Silence your phone, not your intuition.", back: "Notifications can wait. Your nervous system can’t." },
-      { front: "Stretch your body. Stretch your standards.", back: "You deserve both flexibility and respect." },
-      { front: "Saying no is self-care.", back: "Especially to people who drain the fuck outta you." },
-      { front: "You're allowed to fall apart. Just don't unpack there.", back: "Let someone hold space while you rebuild." },
-      { front: "Needing help doesn’t make you weak.", back: "Pretending you don’t — now *that’s* dangerous." },
-      { front: "Community isn’t a luxury.", back: "Go where you're nourished, not just needed." },
-      { front: "Let your desires climax into action.", back: "Stop flirting with your potential." },
-      { front: "Penetrate your purpose.", back: "Get deep, not distracted." },
-      { front: "Don’t just fantasize about the life you want.", back: "Seduce it. Fucking take it." },
-      { front: "You got this.", back: "Seriously, stop doubting it." },
-      { front: "Stop playing small.", back: "You weren’t born to be basic." },
-      { front: "Manifesting won’t fix your overdraft.", back: "Work, bitch." },
-      { front: "Cry it out, clean your face, keep going.", back: "Healing isn’t cute. It’s necessary." },
-      { front: "Ask for fucking help.", back: "You’re not weak, you’re smart." },
-      { front: "Foreplay isn’t just for sex.", back: "Tease your dreams before you finish them." },
-      { front: "You’re not tired, you’re spiritually malnourished.", back: "Go feed your soul. Not the algorithm." },
-      { front: "Your rising sign didn’t ghost your responsibilities.", back: "That was all you, babe." },
-      { front: "Touch some grass.", back: "Nature won’t cure your problems, but you’re less annoying there." },
-      { front: "You’re not in love, you're in denial.", back: "Call it what it is: attachment issues with good lighting." },
-      { front: "Romance yourself first.", back: "Flowers, orgasms, and high standards — all DIY." },
-      { front: "It’s not their job to complete you.", back: "You’re already whole, now act like it." },
-      { front: "You’re not broke — you're just out of alignment.", back: "Redirect your energy, not just your budget." },
-      { front: "You can’t afford that emotional spending spree.", back: "Retail therapy isn’t a cure. It's a distraction." },
-      { front: "Money avoids desperation.", back: "Chill, then charge what you're worth." },
-      { front: "Your triggers are teachers.", back: "Stop skipping class." },
-      { front: "You've made peace with your past — or just muted it?", back: "Silence isn't healing." },
-      { front: "Your inner child deserves more than your excuses.", back: "Show up, reparent, repeat." },
-      { front: "Your Saturn return didn’t ruin your life.", back: "You made the decisions. Own them." },
-      { front: "Stop blaming your moon sign for your moods.", back: "It’s called accountability, babe." },
-      { front: "The stars aligned. You just ghosted the moment.", back: "Show up next time." },
-      { front: "Self-care isn't selfish.", back: "It's survival with candles and consent." },
-      { front: "Cancel the guilt, not the nap.", back: "Rest is a rebellion." },
-      { front: "You don’t always have to be the strong one.", back: "Take the damn hug." },
-      { front: "You’re not burdening them — you’re being brave.", back: "Let yourself be held." },
-      { front: "Even the healer needs a fucking lifeline.", back: "You can’t pour from empty." },
-      { front: "Get intimate with your fears.", back: "Undress them slowly. Then spank them into submission." },
-      { front: "Your power isn't in your pants. It's in your presence.", back: "Still, wear the damn lace." },
-      { front: "Consent to your own desires.", back: "Stop edging your dreams." },
-      { front: "Ask the damn question.", back: "People can't read your mind, babe." },
-      { front: "Your sign isn’t toxic. You are.", back: "Stars don’t justify your crap behavior." },
-      { front: "Your ancestors are side-eyeing your choices.", back: "Don’t make them haunt your ass." },
-      { front: "Your vibe is attracting dust, not abundance.", back: "Clean your energy — and your damn space." },
-      { front: "Stop edging your potential.", back: "Go all in, or zip it." },
-      { front: "You can't heal in the same bed you lost yourself in.", back: "Switch positions — emotionally." },
-      { front: "You're not everyone’s emotional dildo.", back: "Tell them to get therapy, not you." },
-      { front: "Feed your soul, not your hole.", back: "You know which craving you’re actually avoiding." }
+       // Witchcraft
+  { front: "Your spell isn’t broken. Your discipline is.", back: "Intent without action is just a wish.", theme: "witchcraft", tone: "savage" },
+  { front: "The spirit team isn’t ignoring you.", back: "You just haven’t shown up for them all month.", theme: "witchcraft", tone: "savage" },
+  { front: "Stop blaming your tools.", back: "The real magic is in consistency.", theme: "witchcraft", tone: "gentle" },
+  { front: "Witch tip: Cleanse your space and your standards.", back: "Both are overdue.", theme: "witchcraft", tone: "savage" },
+  { front: "Power doesn’t come from Pinterest.", back: "Try study, ritual, and actually committing.", theme: "witchcraft", tone: "savage" },
+  { front: "The ancestors are watching.", back: "Light the damn candle and get to work.", theme: "witchcraft", tone: "gentle" },
+  // Additional Cards by Topic
+  // Love
+  { front: "They’re not your soulmate, they’re your self-worth test.", back: "Stop failing it.", theme: "love", tone: "savage" },
+  { front: "If love feels like chaos, it’s not love.", back: "It’s a trauma bond with nice lighting.", theme: "love", tone: "savage" },
+  { front: "Flirt with your future, not your past.", back: "Don’t text your ex. They’re still trash.", theme: "love", tone: "savage" },
+
+  // Money
+  { front: "The only thing you're investing in is denial.", back: "Open your bank app. Then act like a grown-up.", theme: "money", tone: "savage" },
+  { front: "Money likes direction, not desperation.", back: "Try a plan, not a panic.", theme: "money", tone: "gentle" },
+  { front: "Stop ghosting your budget.", back: "That’s why it keeps haunting you.", theme: "money", tone: "savage" },
+
+  // Shadow Work
+  { front: "You’re not stuck, you’re scared.", back: "Name the fear, then punch it in the throat (metaphorically).", theme: "shadow", tone: "savage" },
+  { front: "You can't heal what you hide.", back: "Expose the wound. Air that shit out.", theme: "shadow", tone: "gentle" },
+  { front: "Quit romanticizing your survival mode.", back: "That’s not strength, it’s exhaustion.", theme: "shadow", tone: "savage" },
+
+  // Astrology
+  { front: "Mercury isn’t sabotaging you — your calendar is.", back: "Try showing up prepared.", theme: "astrology", tone: "savage" },
+  { front: "Your birth chart didn’t make you rude.", back: "Manners are universal, starseed.", theme: "astrology", tone: "savage" },
+  { front: "Astrology is guidance, not gospel.", back: "You still have free will, dumbass.", theme: "astrology", tone: "gentle" },
+
+  // Self-care
+  { front: "Silence your phone, not your intuition.", back: "Notifications can wait. Your nervous system can’t.", theme: "selfcare", tone: "gentle" },
+  { front: "Stretch your body. Stretch your standards.", back: "You deserve both flexibility and respect.", theme: "selfcare", tone: "gentle" },
+  { front: "Saying no is self-care.", back: "Especially to people who drain the fuck outta you.", theme: "selfcare", tone: "savage" },
+
+  // Support
+  { front: "You're allowed to fall apart. Just don't unpack there.", back: "Let someone hold space while you rebuild.", theme: "support", tone: "gentle" },
+  { front: "Needing help doesn’t make you weak.", back: "Pretending you don’t — now *that’s* dangerous.", theme: "support", tone: "gentle" },
+  { front: "Community isn’t a luxury.", back: "Go where you're nourished, not just needed.", theme: "support", tone: "gentle" },
+
+  // Innuendo
+  { front: "Let your desires climax into action.", back: "Stop flirting with your potential.", theme: "innuendo", tone: "savage" },
+  { front: "Penetrate your purpose.", back: "Get deep, not distracted.", theme: "innuendo", tone: "savage" },
+  { front: "Don’t just fantasize about the life you want.", back: "Seduce it. Fucking take it.", theme: "innuendo", tone: "savage" },
+  { front: "What bullshit \"excuses\" are you trying to convince yourself of today?", back: "", theme: "intro", tone: "neutral" },
+  { front: "You got this.", back: "Seriously, stop doubting it.", theme: "motivation", tone: "gentle" },
+  { front: "Stop playing small.", back: "You weren’t born to be basic.", theme: "shadow", tone: "savage" },
+  { front: "Manifesting won’t fix your overdraft.", back: "Work, bitch.", theme: "money", tone: "savage" },
+  { front: "Mercury isn’t in retrograde. You’re just a shit talker.", back: "Try silence for once.", theme: "astrology", tone: "savage" },
+  { front: "Cry it out, clean your face, keep going.", back: "Healing isn’t cute. It’s necessary.", theme: "selfcare", tone: "gentle" },
+  { front: "Ask for fucking help.", back: "You’re not weak, you’re smart.", theme: "support", tone: "savage" },
+  { front: "Foreplay isn’t just for sex.", back: "Tease your dreams before you finish them.", theme: "innuendo", tone: "gentle" },
+  { front: "You’re not tired, you’re spiritually malnourished.", back: "Go feed your soul. Not the algorithm.", theme: "selfcare", tone: "savage" },
+  { front: "Your rising sign didn’t ghost your responsibilities.", back: "That was all you, babe.", theme: "astrology", tone: "savage" },
+  { front: "Touch some grass.", back: "Nature won’t cure your problems, but you’re less annoying there.", theme: "selfcare", tone: "savage" },
+  { front: "You’re not in love, you're in denial.", back: "Call it what it is: attachment issues with good lighting.", theme: "love", tone: "savage" },
+  { front: "Romance yourself first.", back: "Flowers, orgasms, and high standards — all DIY.", theme: "love", tone: "gentle" },
+  { front: "It’s not their job to complete you.", back: "You’re already whole, now act like it.", theme: "love", tone: "gentle" },
+  { front: "You’re not broke — you're just out of alignment.", back: "Redirect your energy, not just your budget.", theme: "money", tone: "gentle" },
+  { front: "You can’t afford that emotional spending spree.", back: "Retail therapy isn’t a cure. It's a distraction.", theme: "money", tone: "savage" },
+  { front: "Money avoids desperation.", back: "Chill, then charge what you're worth.", theme: "money", tone: "gentle" },
+  { front: "Your triggers are teachers.", back: "Stop skipping class.", theme: "shadow", tone: "savage" },
+  { front: "You've made peace with your past — or just muted it?", back: "Silence isn't healing.", theme: "shadow", tone: "gentle" },
+  { front: "Your inner child deserves more than your excuses.", back: "Show up, reparent, repeat.", theme: "shadow", tone: "gentle" },
+  { front: "Your Saturn return didn’t ruin your life.", back: "You made the decisions. Own them.", theme: "astrology", tone: "savage" },
+  { front: "Stop blaming your moon sign for your moods.", back: "It’s called accountability, babe.", theme: "astrology", tone: "savage" },
+  { front: "The stars aligned. You just ghosted the moment.", back: "Show up next time.", theme: "astrology", tone: "gentle" },
+  { front: "Self-care isn't selfish.", back: "It's survival with candles and consent.", theme: "selfcare", tone: "gentle" },
+  { front: "Cancel the guilt, not the nap.", back: "Rest is a rebellion.", theme: "selfcare", tone: "gentle" },
+  { front: "Your burnout isn’t a badge.", back: "Stop wearing suffering like it’s couture.", theme: "selfcare", tone: "savage" },
+  { front: "You don’t always have to be the strong one.", back: "Take the damn hug.", theme: "support", tone: "gentle" },
+  { front: "You’re not burdening them — you’re being brave.", back: "Let yourself be held.", theme: "support", tone: "gentle" },
+  { front: "Even the healer needs a fucking lifeline.", back: "You can’t pour from empty.", theme: "support", tone: "savage" },
+  { front: "Get intimate with your fears.", back: "Undress them slowly. Then spank them into submission.", theme: "innuendo", tone: "savage" },
+  { front: "Your power isn't in your pants. It's in your presence.", back: "Still, wear the damn lace.", theme: "innuendo", tone: "gentle" },
+  { front: "Consent to your own desires.", back: "Stop edging your dreams.", theme: "innuendo", tone: "gentle" },
+  { front: "You're not unlucky in love — you're just ignoring your gut.", back: "That red flag? It's not a challenge.", theme: "love", tone: "savage" },
+  { front: "You're not 'bad with money'.", back: "You're just allergic to spreadsheets.", theme: "money", tone: "savage" },
+  { front: "Ask the damn question.", back: "People can't read your mind, babe.", theme: "support", tone: "gentle" },
+  { front: "Your sign isn’t toxic. You are.", back: "Stars don’t justify your crap behavior.", theme: "astrology", tone: "savage" },
+  { front: "Your ancestors are side-eyeing your choices.", back: "Don’t make them haunt your ass.", theme: "shadow", tone: "savage" },
+  { front: "Your vibe is attracting dust, not abundance.", back: "Clean your energy — and your damn space.", theme: "shadow", tone: "savage" },
+  { front: "Stop edging your potential.", back: "Go all in, or zip it.", theme: "selfcare", tone: "savage" },
+  { front: "Foreplay isn't just for sex.", back: "Tease your goals — then fuckin’ finish them.", theme: "innuendo", tone: "savage" },
+  { front: "You can't heal in the same bed you lost yourself in.", back: "Switch positions — emotionally.", theme: "innuendo", tone: "gentle" },
+  { front: "You're not everyone’s emotional dildo.", back: "Tell them to get therapy, not you.", theme: "support", tone: "savage" }
     ];
 
     let deck = [];
 
     function shuffleDeck() {
+      console.log("Shuffling deck...");
       deck = [...fullDeck];
       for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
       }
+      console.log("Deck shuffled:", deck.length, "cards");
     }
 
     function drawCard() {
-  if (deck.length === 0) {
-    alert("You've drawn all the cards. Click 'Reset Deck' to start over.");
-    document.getElementById('drawButton').disabled = true;
-    return;
-  }
-  const card = deck.pop();
-  document.getElementById('front').textContent = card.front;
-  document.getElementById('back').textContent = card.back;
-  document.getElementById('oracleCard').classList.remove('flipped');
-}
+      if (deck.length === 0) {
+        alert("You've drawn all the cards. Click 'Reset Deck' to start over.");
+        document.getElementById('drawButton').disabled = true;
+        return;
+      }
+      const card = deck.pop();
+      console.log("Card drawn:", card);
+      document.getElementById('front').textContent = card.front;
+      document.getElementById('back').textContent = card.back;
+    }
 
-    document.getElementById('drawButton').addEventListener('click', drawCard);
-
-    document.getElementById('resetButton').addEventListener('click', () => {
-  shuffleDeck();
-  document.getElementById('front').textContent = "What bullshit \"excuses\" are you trying to convince yourself of today?";
-  document.getElementById('back').textContent = "Click to flip and reveal your wisdom.";
-  document.getElementById('oracleCard').classList.remove('flipped');
-  document.getElementById('drawButton').disabled = false;
-}););
-
-    document.getElementById('oracleCard').addEventListener('click', () => {
-      document.getElementById('oracleCard').classList.toggle('flipped');
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log("Page loaded. Setting up buttons...");
+      shuffleDeck();
+      document.getElementById('drawButton').addEventListener('click', drawCard);
+      document.getElementById('resetButton').addEventListener('click', () => {
+        shuffleDeck();
+        document.getElementById('front').textContent = "What bullshit \"excuses\" are you trying to convince yourself of today?";
+        document.getElementById('back').textContent = "Click draw to reveal your wisdom.";
+        document.getElementById('drawButton').disabled = false;
+        console.log("Deck reset.");
+      });
     });
-
-    window.addEventListener('DOMContentLoaded', shuffleDeck);
   </script>
 </body>
 </html>
